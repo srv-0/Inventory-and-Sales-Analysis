@@ -1,19 +1,13 @@
 # Business Problems & KPI Glossary
 ### Inventory & Sales Analysis — UrbanNest Retail Co. (fictional retail company)
 
-This document turns the raw data + EDA + SQL findings into the 6 business
-problems the project is built to answer, plus a simple, interview-defensible
-KPI glossary used consistently across Python, SQL, Excel, and Power BI.
+This project turns the raw data + EDA + SQL findings into the 6 business problems and their answers, KPI glossary used consistently across Python, SQL, Excel, and Power BI.
 
 ---
 
 ## 1. Company & Data Snapshot
 
-UrbanNest Retail Co. is a fictional mid-sized retailer selling 12 categories
-of consumer goods (Apparel, Electronics, Home & Kitchen, Grocery & Gourmet,
-Personal Care, Sports & Fitness, Toys & Games, Stationery & Office,
-Furniture, Beauty & Cosmetics, Pet Supplies, Automotive Accessories) across
-8 stores/fulfillment hubs in India, through both online and in-store channels.
+UrbanNest Retail Co. is a fictional mid size retailer selling 12 categories of consumer goods (Apparel, Electronics, Home & Kitchen, Grocery & Gourmet, Personal Care, Sports & Fitness, Toys & Games, Stationery & Office, Furniture, Beauty & Cosmetics, Pet Supplies, Automotive Accessories) across 8 stores/fulfillment hubs in India, through both online and offline store channels.
 
 | Table | Rows | Grain |
 |---|---|---|
@@ -26,7 +20,7 @@ Furniture, Beauty & Cosmetics, Pet Supplies, Automotive Accessories) across
 
 ---
 
-## 2. KPI Glossary (kept simple and interview-defensible)
+## 2. KPI Glossary 
 
 | KPI | Formula | Why it matters |
 |---|---|---|
@@ -47,8 +41,7 @@ Furniture, Beauty & Cosmetics, Pet Supplies, Automotive Accessories) across
 | **Category Contribution %** | `Category Revenue / Total Revenue` | Where the business actually makes its money |
 | **Sales per Store** | `Store Revenue / Number of Stores (or per store directly)` | Store-level productivity comparison |
 
-**Actual headline numbers from the generated dataset** (see `EDA_Report.md`
-for the full breakdown):
+**Actual headline numbers from the generated dataset** (see `EDA_Report.md` for the full breakdown):
 
 - Total Revenue: **₹3.13 Cr** across 24 months
 - Total Units Sold: **27,922**
@@ -60,10 +53,6 @@ for the full breakdown):
 ---
 
 ## 3. The Six Business Problems
-
-For each problem: business question → relevant data → KPI(s) → analysis
-approach → finding (from the actual dataset) → business implication →
-recommended action.
 
 ### Problem 1 — Which products/categories should receive more inventory?
 - **Data:** SALES (demand/velocity), INVENTORY (stockout_months), PRODUCTS
@@ -122,4 +111,4 @@ recommended action.
 3. **Excel** — a formula-driven KPI/pivot layer for quick, no-code reporting (`Excel_Analysis` sheet inside the raw workbook).
 4. **Power BI** — a 3-page dashboard spec + DAX measures to make the above interactive for stakeholders (`PowerBI_Dashboard_Guide_and_DAX.md`).
 
-All findings above are pulled directly from the generated dataset — nothing here was written before running the analysis.
+All findings above are pulled directly from the generated dataset and nothing here was written before running the analysis.
