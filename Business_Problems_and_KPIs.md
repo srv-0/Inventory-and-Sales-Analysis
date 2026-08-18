@@ -54,15 +54,15 @@ UrbanNest Retail Co. is a fictional mid size retailer selling 12 categories of c
 
 ## 3. The Six Business Problems
 
-### Problem 1 — Which products/categories should receive more inventory?
+### Problem 1.  Which products/categories should receive more inventory?
 - **Data:** SALES (demand/velocity), INVENTORY (stockout_months), PRODUCTS
 - **KPI:** Stockout Rate, Stockout Months per product, Units Sold
 - **Approach:** SQL Q11 (frequent stockouts) joined against SQL Q5 (top sellers by volume) to find high-demand products that are *also* chronically out of stock.
-- **Finding:** A small cluster of fast-moving ("Star") products stock out in 8+ of the last 12–36 tracked months despite strong, consistent demand — supply isn't keeping pace with sell-through.
+- **Finding:** A small cluster of fast-moving ("Star") products stock out in 8+ of the last 12–36 tracked months despite strong, consistent demand.
 - **Business implication:** Every stockout month on a fast mover is lost revenue that likely shifted to a competitor or was simply not captured.
 - **Recommended action:** Raise the reorder level and tighten the replenishment cycle specifically for these SKUs; consider a dedicated fast-mover replenishment lane instead of the standard cycle.
 
-### Problem 2 — Which products are slow-moving or overstocked?
+### Problem 2.  Which products are slow-moving or overstocked?
 - **Data:** INVENTORY (turnover, overstock_months), SALES (units sold)
 - **KPI:** Inventory Turnover, Overstock Rate, Inventory Value
 - **Approach:** SQL Q19 (slow-moving inventory) ranks products by turnover ratio; SQL Q10 cross-checks low-sales-high-inventory combinations.
@@ -70,7 +70,7 @@ UrbanNest Retail Co. is a fictional mid size retailer selling 12 categories of c
 - **Business implication:** Capital is tied up in inventory that isn't converting to revenue, and it carries holding-cost and obsolescence risk.
 - **Recommended action:** Run a clearance/discount cycle on the worst-turnover SKUs; reduce future purchase order quantities for these categories/suppliers.
 
-### Problem 3 — Which products frequently become out of stock?
+### Problem 3.  Which products frequently become out of stock?
 - **Data:** INVENTORY (stock_status history)
 - **KPI:** Stockout Rate, Stockout Months
 - **Approach:** SQL Q11, cross-referenced with product category and store to see if stockouts cluster anywhere.
@@ -78,7 +78,7 @@ UrbanNest Retail Co. is a fictional mid size retailer selling 12 categories of c
 - **Business implication:** This is a supply-chain/procurement-cadence problem for specific SKUs, not a system-wide inventory shortage.
 - **Recommended action:** Set SKU-specific safety stock and reorder points instead of a one-size-fits-all reorder rule.
 
-### Problem 4 — Which categories/stores generate the strongest sales performance?
+### Problem 4.  Which categories/stores generate the strongest sales performance?
 - **Data:** SALES, STORES, PRODUCTS
 - **KPI:** Revenue by Category, Revenue by Store, Category Contribution %
 - **Approach:** SQL Q4, Q6, Q15 (category %, store revenue, ranked contribution).
@@ -86,7 +86,7 @@ UrbanNest Retail Co. is a fictional mid size retailer selling 12 categories of c
 - **Business implication:** Revenue is concentrated — a small number of categories and stores disproportionately drive the topline.
 - **Recommended action:** Protect and grow the top categories/stores (inventory priority, staffing, marketing spend); investigate underperforming stores for local demand, staffing, or assortment issues.
 
-### Problem 5 — How are discounts affecting revenue and profitability?
+### Problem 5.  How are discounts affecting revenue and profitability?
 - **Data:** SALES (discount_amount, final_amount)
 - **KPI:** Average Discount % by Category, Gross Margin %, Revenue
 - **Approach:** SQL Q8 (avg discount by category) plotted against category revenue (see `12_discount_vs_revenue.png`).
@@ -94,7 +94,7 @@ UrbanNest Retail Co. is a fictional mid size retailer selling 12 categories of c
 - **Business implication:** Blanket discounting isn't an efficient revenue lever here; other factors (demand, price tier, assortment) matter more.
 - **Recommended action:** Move from uniform, calendar-driven discounting toward targeted discounting on genuinely slow-moving stock, and protect margin on already-fast-moving products that don't need a discount to sell.
 
-### Problem 6 — Which customer segments and products should receive greater attention?
+### Problem 6. Which customer segments and products should receive greater attention?
 - **Data:** SALES, CUSTOMERS, PRODUCTS
 - **KPI:** Revenue by Segment, Revenue by Product, Margin % by Product
 - **Approach:** SQL Q7 (segment contribution), Q9 (margin leaders), Q16 (top products per category).
