@@ -48,7 +48,8 @@ UrbanNest Retail Co. is a fictional mid size retailer selling 12 categories of c
 - Number of Orders: **10,034** (valid transactions)
 - Average Order Value: **₹3,116**
 - Gross Margin: **24.2%**
-- Stockout Rate: **0.23%** | Overstock Rate: **16.5%**
+- Stockout Rate: **0.23%**
+- Overstock Rate: **16.5%**
 
 # Monthly Revenue
 ![https://github.com/srv-0/Inventory-and-Sales-Analysis/blob/main/charts/01_monthly_revenue_trend.png](https://github.com/srv-0/Inventory-and-Sales-Analysis/blob/main/charts/01_monthly_revenue_trend.png)
