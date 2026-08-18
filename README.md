@@ -1,7 +1,7 @@
-# Business Problems & KPI Glossary
-### Inventory & Sales Analysis — UrbanNest Retail Co. (fictional retail company)
+# Inventory & Sales Analysis
+### UrbanNest Retail Co. (fictional retail company)
 
-This project turns the raw data + EDA + SQL findings into the 6 business problems and their answers, KPI glossary used consistently across Python, SQL, Excel, and Power BI.
+This project turns the raw data + EDA + SQL findings into the business problems and their answers, KPI glossary used consistently across Python, SQL, Excel, and Power BI.
 
 ---
 
@@ -22,24 +22,24 @@ UrbanNest Retail Co. is a fictional mid size retailer selling 12 categories of c
 
 ## 2. KPI Glossary 
 
-| KPI | Formula | Why it matters |
-|---|---|---|
-| **Total Revenue** | `SUM(final_amount)` | Top-line sales performance |
-| **Total Units Sold** | `SUM(quantity)` | Volume driver behind revenue |
-| **Number of Orders** | `COUNT(DISTINCT sale_id)` | Transaction frequency |
-| **Average Order Value (AOV)** | `Total Revenue / Number of Orders` | Basket size / spend per transaction |
-| **Average Selling Price (ASP)** | `SUM(unit_price*quantity) / SUM(quantity)` | Pricing level, independent of discounting |
-| **Total Discount** | `SUM(discount_amount)` | Cost of promotions/markdowns |
-| **Gross Profit** | `SUM((unit_price - unit_cost)*quantity - discount_amount)` | Profit after cost of goods and discount |
-| **Gross Margin %** | `Gross Profit / Total Revenue` | Profitability as a % of sales |
-| **Inventory Value** | `SUM(closing_stock * unit_cost)` | Capital tied up in stock, at cost |
-| **Average Inventory** | `AVG(closing_stock)` over the period | Baseline stock level for turnover calc |
-| **Inventory Turnover** | `Units Sold (period) / Average Inventory (period)` | How efficiently stock converts to sales |
-| **Stockout Rate** | `Out-of-Stock records / Total inventory records` | % of the time products aren't available to sell |
-| **Overstock Rate** | `Overstock records / Total inventory records` | % of the time capital is sitting idle in excess stock |
-| **Revenue Growth % (MoM)** | `(Revenue_month − Revenue_prev_month) / Revenue_prev_month` | Trend direction, momentum |
-| **Category Contribution %** | `Category Revenue / Total Revenue` | Where the business actually makes its money |
-| **Sales per Store** | `Store Revenue / Number of Stores (or per store directly)` | Store-level productivity comparison |
+| KPI | Why it matters |
+|---|---|
+| **Total Revenue** | Top-line sales performance |
+| **Total Units Sold** | Volume driver behind revenue |
+| **Number of Orders** | Transaction frequency |
+| **Average Order Value (AOV)** | Basket size / spend per transaction |
+| **Average Selling Price (ASP)** | Pricing level, independent of discounting |
+| **Total Discount** | Cost of promotions/markdowns |
+| **Gross Profit** | Profit after cost of goods and discount |
+| **Gross Margin %** | Profitability as a % of sales |
+| **Inventory Value** | Capital tied up in stock, at cost |
+| **Average Inventory** | Baseline stock level for turnover calc |
+| **Inventory Turnover**  | How efficiently stock converts to sales |
+| **Stockout Rate** | % of the time products aren't available to sell |
+| **Overstock Rate** | % of the time capital is sitting idle in excess stock |
+| **Revenue Growth % (MoM)** | Trend direction, momentum |
+| **Category Contribution %** | Where the business actually makes its money |
+| **Sales per Store** | Store-level productivity comparison |
 
 **Actual headline numbers from the generated dataset** (see `EDA_Report.md` for the full breakdown):
 
