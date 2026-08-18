@@ -1,19 +1,13 @@
 # Power BI Dashboard Guide & DAX Measures
-### Inventory & Sales Analysis — UrbanNest Retail Co.
-
-This is a build-guide for a 3-page Power BI dashboard on top of the
-`Inventory_Sales_Analysis_RawData.xlsx` workbook (or the SQL tables in
-`SQL_Business_Analysis.sql`, if you connect Power BI directly to a database
-instead of the Excel file). It covers the data model, every DAX measure,
-and what goes on each page — written so you can rebuild it in Power BI
-Desktop and also explain the choices in an interview.
+### Inventory & Sales Analysis (UrbanNest Retail Co.)
 
 ---
 
 ## 1. Data Model
 
 Import all 6 tables (PRODUCTS, CUSTOMERS, SALES, INVENTORY, STORES,
-SALESPERSONS). Set up a **star-schema-style model**:
+SALESPERSONS).
+Set up a **star-schema-style model**:
 
 ```
                  PRODUCTS
@@ -116,12 +110,10 @@ CALCULATE (
 ```
 
 Every measure maps to a KPI already defined in `Business_Problems_and_KPIs.md`
-— keep that mapping consistent so numbers match across Excel/SQL/Power BI
-in an interview.
 
 ---
 
-## 3. Page 1 — Executive Sales Overview
+## 3. Page 1. Executive Sales Overview
 
 **KPI cards (top row):** Total Revenue · Total Orders · Total Units ·
 Average Order Value · Gross Profit · Gross Margin %
@@ -137,7 +129,7 @@ Average Order Value · Gross Profit · Gross Margin %
 
 ---
 
-## 4. Page 2 — Inventory Analysis
+## 4. Page 2. Inventory Analysis
 
 **KPI cards:** Inventory Value · Average Inventory · Inventory Turnover ·
 Stockout Rate · Overstock Rate
@@ -156,7 +148,7 @@ Inventory Turnover.
 
 ---
 
-## 5. Page 3 — Product & Customer Analysis
+## 5. Page 3. Product & Customer Analysis
 
 **Visuals:**
 - Bar chart (Top N): `PRODUCTS[product_name]` → `[Total Revenue]`
@@ -170,22 +162,3 @@ Inventory Turnover.
 **Slicers:** Category, Customer Segment, Age Group, Sales Channel
 
 ---
-
-## 6. Build Notes / Interview Talking Points
-
-- **Why a star schema:** keeps every measure a simple `SUM`/`DIVIDE` over the
-  SALES/INVENTORY fact tables, avoids ambiguous relationship paths, and is
-  the standard, defensible modeling choice for a BA-level dashboard.
-- **Why `DATEADD` for MoM growth instead of a manual LAG-style calc:**
-  `DATEADD` respects the active filter context (slicers, drill-downs) so
-  the growth % stays correct no matter what the user has filtered to —
-  a hard-coded row-offset wouldn't.
-- **Why Inventory Turnover uses `INVENTORY[sold_quantity]` and not
-  `SALES[quantity]`:** the inventory table's `sold_quantity` is scoped to
-  the exact same 12-month window as `closing_stock`, so turnover is
-  computed on a like-for-like basis; mixing a 24-month sales figure with
-  a 12-month average inventory would inflate the ratio.
-- **Why the KPI cards are duplicated per page instead of one global page:**
-  each page is meant to support a different conversation (sales
-  performance vs. inventory health vs. product/customer mix), so the KPIs
-  shown are the ones relevant to that conversation.
