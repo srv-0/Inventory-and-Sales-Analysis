@@ -22,11 +22,10 @@ plt.rcParams.update({"figure.dpi": 130, "font.size": 9, "axes.titleweight": "bol
 CHART_DIR = "/home/claude/project/charts"
 os.makedirs(CHART_DIR, exist_ok=True)
 
-RAW_PATH = "/home/claude/project/data/Inventory_Sales_Analysis_RawData.xlsx"
+RAW_PATH = "Inventory & Sales Data.xlsx"
 
-# =====================================================
+
 # 1. LOAD
-# =====================================================
 xl = pd.ExcelFile(RAW_PATH)
 products = xl.parse("PRODUCTS")
 customers = xl.parse("CUSTOMERS")
@@ -37,17 +36,14 @@ salespersons = xl.parse("SALESPERSONS")
 
 report = {}
 
-# =====================================================
 # 2. DATASET OVERVIEW / SHAPE / DTYPES
-# =====================================================
 shapes = {name: df.shape for name, df in
           [("PRODUCTS", products), ("CUSTOMERS", customers), ("SALES", sales),
            ("INVENTORY", inventory), ("STORES", stores), ("SALESPERSONS", salespersons)]}
 report["shapes"] = {k: list(v) for k, v in shapes.items()}
 
-# =====================================================
+
 # 3. MISSING VALUE ANALYSIS (before cleaning)
-# =====================================================
 missing = {}
 for name, df in [("PRODUCTS", products), ("CUSTOMERS", customers), ("SALES", sales),
                   ("INVENTORY", inventory), ("STORES", stores), ("SALESPERSONS", salespersons)]:
@@ -55,9 +51,8 @@ for name, df in [("PRODUCTS", products), ("CUSTOMERS", customers), ("SALES", sal
     missing[name] = {c: int(v) for c, v in m[m > 0].items()}
 report["missing_before_cleaning"] = missing
 
-# =====================================================
+
 # 4. DUPLICATE ANALYSIS
-# =====================================================
 exact_dupe_sales = int(sales.duplicated().sum())
 # near-duplicate: same customer, product, store, date, quantity but different sale_id
 near_dupe_mask = sales.duplicated(subset=["sale_date","product_id","customer_id","store_id","quantity"], keep=False)
@@ -65,9 +60,8 @@ near_dupe_count = int(near_dupe_mask.sum())
 report["duplicates"] = {"exact_duplicate_rows": exact_dupe_sales,
                          "near_duplicate_rows_flagged": near_dupe_count}
 
-# =====================================================
+
 # 5. REFERENTIAL INTEGRITY CHECKS
-# =====================================================
 integrity = {}
 integrity["sales_product_id_orphans"] = int((~sales["product_id"].isin(products["product_id"])).sum())
 integrity["sales_customer_id_orphans"] = int((~sales["customer_id"].isin(customers["customer_id"])).sum())
@@ -78,9 +72,7 @@ integrity["inventory_store_id_orphans"] = int((~inventory["store_id"].isin(store
 integrity["salespersons_store_id_orphans"] = int((~salespersons["store_id"].isin(stores["store_id"])).sum())
 report["referential_integrity"] = integrity
 
-# =====================================================
 # 6. DATA CLEANING
-# =====================================================
 sales_clean = sales.copy()
 products_clean = products.copy()
 customers_clean = customers.copy()
@@ -156,15 +148,15 @@ sales_analysis.to_pickle("/home/claude/project/data/sales_analysis_clean.pkl")
 products_clean.to_pickle("/home/claude/project/data/products_clean.pkl")
 customers_clean.to_pickle("/home/claude/project/data/customers_clean.pkl")
 
-# =====================================================
+
 # 7. DESCRIPTIVE STATS
-# =====================================================
+
 desc = sales_analysis[["quantity","unit_price","discount_amount","final_amount"]].describe().round(2)
 report["sales_descriptive_stats"] = desc.to_dict()
 
-# =====================================================
+
 # 8. MERGE FOR ANALYSIS
-# =====================================================
+
 sales_m = sales_analysis.merge(products_clean, on="product_id", how="left") \
                          .merge(stores, on="store_id", how="left", suffixes=("","_store")) \
                          .merge(customers_clean, on="customer_id", how="left", suffixes=("","_cust"))
@@ -192,9 +184,8 @@ kpis = {
 }
 report["headline_kpis"] = kpis
 
-# =====================================================
+
 # 9-13. CATEGORY / STORE / SEGMENT / DISCOUNT ANALYSIS
-# =====================================================
 cat_rev = sales_m.groupby("category")["final_amount"].sum().sort_values(ascending=False)
 store_rev = sales_m.groupby("store_name")["final_amount"].sum().sort_values(ascending=False)
 segment_rev = sales_m.groupby("customer_segment")["final_amount"].sum().sort_values(ascending=False)
@@ -205,17 +196,15 @@ report["revenue_by_store"] = store_rev.round(2).to_dict()
 report["revenue_by_segment"] = segment_rev.round(2).to_dict()
 report["avg_discount_pct_by_category"] = (disc_by_cat*100).round(2).to_dict()
 
-# =====================================================
+
 # 14-15. MONTHLY TRENDS + MoM GROWTH
-# =====================================================
 monthly = sales_m.groupby("month")["final_amount"].sum().sort_index()
 mom_growth = monthly.pct_change() * 100
 report["monthly_revenue"] = {str(k.date()): round(v,2) for k,v in monthly.items()}
 report["mom_growth_pct"] = {str(k.date()): (round(v,2) if pd.notna(v) else None) for k,v in mom_growth.items()}
 
-# =====================================================
+
 # 16-20. INVENTORY ANALYSIS
-# =====================================================
 inv_m = inventory.merge(products_clean, on="product_id", how="left")
 stock_status_counts = inv_m["stock_status"].value_counts()
 report["stock_status_distribution"] = stock_status_counts.to_dict()
@@ -246,9 +235,7 @@ prod_turnover_df = prod_turnover_df.merge(avg_inv.rename("avg_inventory"), on="p
 slow_movers = prod_turnover_df[(prod_turnover_df["avg_inventory"] > 20)].sort_values("turnover").head(15)
 report["top15_slow_moving_products"] = slow_movers[["product_id","product_name","category","turnover","avg_inventory"]].round(2).to_dict("records")
 
-# =====================================================
 # PRODUCT PROFITABILITY
-# =====================================================
 # Exclude the small number of rows where unit_price is a data-entry outlier (>2x the product's
 # catalogue selling_price) so a handful of corrupted rows don't distort the margin ranking --
 # this is exactly the kind of check a BA would run before trusting a profitability report.
