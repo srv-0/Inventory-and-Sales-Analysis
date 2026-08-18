@@ -1,14 +1,14 @@
 # Final Business Insights & Recommendations
-### Inventory & Sales Analysis — UrbanNest Retail Co.
+### Inventory & Sales Analysis (UrbanNest Retail Co).
 
 Every insight below follows **METRIC → OBSERVATION → BUSINESS IMPLICATION →
 ACTION**, and every number is pulled from the actual generated dataset
 (see `EDA_Report.md` and `SQL_Business_Analysis.sql` for the underlying
-calculations) — nothing here was written before running the analysis.
+calculations), nothing here was written before running the analysis.
 
 ---
 
-### Insight 1 — Revenue is concentrated in two categories
+### Insight 1.  Revenue is concentrated in two categories
 **METRIC:** Furniture = ₹1.25 Cr (40% of total revenue), Sports & Fitness = ₹0.55 Cr (17%). Combined, 2 of 12 categories drive ~57% of revenue.
 **OBSERVATION:** These are also the two highest average-selling-price categories, not the highest-unit-volume ones.
 **BUSINESS IMPLICATION:** The business is more price-point-dependent than volume-dependent — a slowdown in either category has an outsized revenue impact.
@@ -16,7 +16,7 @@ calculations) — nothing here was written before running the analysis.
 
 ---
 
-### Insight 2 — Revenue leaders and volume leaders are different products
+### Insight 2. Revenue leaders and volume leaders are different products
 **METRIC:** Top-10-by-revenue is dominated by Furniture SKUs; top-10-by-units-sold (SQL Q5) is dominated by lower-price categories.
 **OBSERVATION:** A small number of high-ticket Furniture items generate revenue disproportionate to how often they actually sell.
 **BUSINESS IMPLICATION:** Revenue-based product rankings alone would mislead inventory planning — a high-revenue SKU with low unit velocity still needs a *different* stocking strategy than a high-volume SKU.
@@ -24,7 +24,7 @@ calculations) — nothing here was written before running the analysis.
 
 ---
 
-### Insight 3 — Overstock is a bigger, more diffuse problem than stockouts
+### Insight 3. Overstock is a bigger, more diffuse problem than stockouts
 **METRIC:** Overstock Rate = 16.5% of inventory records vs. Stockout Rate = 0.23%.
 **OBSERVATION:** Excess stock is spread across "Slow"/"Dead" velocity products in nearly every category, not concentrated in one place.
 **BUSINESS IMPLICATION:** A meaningful share of working capital is tied up in stock that isn't converting to sales — this is a cash-flow and warehousing-cost issue, not just a "nice to fix" one.
@@ -32,7 +32,7 @@ calculations) — nothing here was written before running the analysis.
 
 ---
 
-### Insight 4 — A small set of fast movers chronically stock out
+### Insight 4. A small set of fast movers chronically stock out
 **METRIC:** SQL Q11 identifies specific SKUs with 8+ stockout months out of 12-36 tracked, despite being top-velocity ("Star") products.
 **OBSERVATION:** These products have consistent, strong demand — the problem is supply cadence, not demand uncertainty.
 **BUSINESS IMPLICATION:** Every stockout month on these SKUs is close to guaranteed lost revenue, since demand is proven and predictable.
@@ -40,7 +40,7 @@ calculations) — nothing here was written before running the analysis.
 
 ---
 
-### Insight 5 — Discount level doesn't explain revenue differences between categories
+### Insight 5. Discount level doesn't explain revenue differences between categories
 **METRIC:** Average discount % is fairly flat across categories (~18-20%), while category revenue ranges from ₹3.2L (Pet Supplies) to ₹1.25 Cr (Furniture) — a >35x spread.
 **OBSERVATION:** Categories that discount similarly perform very differently on revenue.
 **BUSINESS IMPLICATION:** Blanket, calendar-driven discounting isn't the lever moving revenue here — price point, assortment, and demand are.
@@ -48,7 +48,7 @@ calculations) — nothing here was written before running the analysis.
 
 ---
 
-### Insight 6 — Premium customers spend more per head, but Regular customers are the volume base
+### Insight 6. Premium customers spend more per head, but Regular customers are the volume base
 **METRIC:** Regular segment ≈ 57% of revenue, Premium ≈ 27% of revenue from a proportionally smaller customer base (20% of customers).
 **OBSERVATION:** Premium customers have a materially higher average order value.
 **BUSINESS IMPLICATION:** The two segments need different strategies — Regular customers need to be retained at scale (volume engine), Premium customers are worth a higher-touch retention investment (value engine).
@@ -56,7 +56,7 @@ calculations) — nothing here was written before running the analysis.
 
 ---
 
-### Insight 7 — Store performance varies more than store type alone explains
+### Insight 7. Store performance varies more than store type alone explains
 **METRIC:** Mumbai Flagship (₹63L) generates ~2.5x the revenue of Pune Store (₹24.5L).
 **OBSERVATION:** Both are "Standard Store" type in several cases, yet revenue differs substantially by region/city.
 **BUSINESS IMPLICATION:** Local market factors (footfall, city-level demand, staffing, or assortment fit) are driving performance more than store format.
@@ -64,7 +64,7 @@ calculations) — nothing here was written before running the analysis.
 
 ---
 
-### Insight 8 — Revenue shows a clear, repeatable seasonal pattern
+### Insight 8. Revenue shows a clear, repeatable seasonal pattern
 **METRIC:** October–November revenue peaks at ~₹18-21L/month vs. a January–February trough of ~₹9-10L/month — roughly a 2x swing.
 **OBSERVATION:** The pattern repeats consistently across both years of data.
 **BUSINESS IMPLICATION:** This is predictable enough to plan around — inventory, staffing, and marketing spend should flex with it rather than stay flat year-round.
@@ -72,7 +72,7 @@ calculations) — nothing here was written before running the analysis.
 
 ---
 
-### Insight 9 — Online is the larger channel, but not overwhelmingly so
+### Insight 9. Online is the larger channel, but not overwhelmingly so
 **METRIC:** Online revenue = ₹1.78 Cr (57%) vs. In-Store = ₹1.35 Cr (43%).
 **OBSERVATION:** The split is fairly consistent across categories (see the Excel `Excel_Analysis` category × channel pivot).
 **BUSINESS IMPLICATION:** Neither channel can be deprioritized — both are meaningful contributors, and category-level channel mix doesn't show a category that's "gone all-online."
