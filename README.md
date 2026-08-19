@@ -41,6 +41,10 @@ UrbanNest Retail Co. is a fictional mid size retailer selling 12 categories of c
 | **Category Contribution %** | Where the business actually makes its money |
 | **Sales per Store** | Store-level productivity comparison |
 
+# Dashboard
+<img width="1617" height="651" alt="image" src="https://github.com/user-attachments/assets/43bb7d36-fa5a-4035-8604-84b9d71abf79" />
+
+
 **Actual headline numbers from the generated dataset** (see `EDA_Report.md` for the full breakdown):
 
 - Total Revenue: **₹3.13 Cr** across 24 months
